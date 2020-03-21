@@ -1,0 +1,57 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix ldp:      <http://www.w3.org/ns/ldp#> .
+@prefix schema:   <http://schema.org/> .
+@prefix vann:     <http://purl.org/vocab/vann/> .
+@prefix wcms:     <http://localhost:5000/wcms.ttl>
+
+wcms:
+	a owl:Ontology ;
+	owl:versionInfo "0.1.0" ;
+ 	dcterms:title "Webcomic and manga scans"@en ;
+	dcterms:description """This vocabulary provides terms to reference comics published online. In particular, it intends at representing periodically published webcomics and manga scans."""@en ;
+	dcterms:creator <https://nseydoux.inrupt.net/profile/card#me> ;
+	dcterms:date "2020-03-15" ;
+	dcterms:license <https://opensource.org/licenses/MIT> ;
+	vann:preferredNamespacePrefix "wcms" ;
+	vann:preferredNamespaceUri "https://nseydoux.inrupt.net/public/voc/wcms.ttl" .
+
+wcms:Manga a rdfs:Class;
+    rdfs:label "Manga"@en;
+    rdfs:comment "A manga  is a type of comic originating from Japan. The popular mangas are often published weekly."@en.
+
+wcms:Chapter a rdfs:Class;
+    rdfs:label "Chapter"@en;
+    rdfs:comment "A set of pages published together. Typically, a manga chapter is published weekly."@en.
+
+wcms:Tome a rdfs:Class;
+    rdfs:label "Tome"@en;
+    rdfs:comment "A set of chapters published together. Mangas are printed and distributed in this form."@en.
+
+wcms:Webcomic a rdfs:Class;
+    rdfs:label "Webcomic"@en;
+    rdfs:comment "A webcomic is a comic periodically published on the web. It often has commonalities with the press syndicated comics."@en.
+
+wcms:lastRead a rdf:Property;
+    rdfs:label "last read"@en;
+    rdfs:comment "The last issue or chapter read by a person."@en.
+
+wcms:nextChapter a rdf:Property;
+    rdfs:label "next chapter"@en;
+    rdfs:comment "Link to the following chapter"@en.
+
+wcms:startsAt a rdf:Property;
+    rdfs:label "starts at"@en;
+    rdfs:comment "Indicates the point when something starts. Useful to indicate the chapter at which a volume starts."@en.
+
+wcms:endsAt a rdf:Property;
+    rdfs:label "ends at"@en;
+    rdfs:comment "Indicates the point when something ends. Useful to indicate the chapter at which a volume ends."@en.
+
+wcms:number a rdf:Property;
+    rdfs:label "number"@en;
+    rdfs:comment "Indicates the number of an issue, a volume, a chapter...".

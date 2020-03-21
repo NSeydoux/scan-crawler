@@ -1,0 +1,170 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix ldp:      <http://www.w3.org/ns/ldp#> .
+@prefix schema:   <http://schema.org/> .
+@prefix wcms:     <http://localhost:5000/wcms.ttl>
+@prefix op:       <http://localhost:5000/one-piece.ttl>
+
+:OnePiece a wcms:Manga;
+    dc:title "One Piece"@en;
+    dc:creator "Eichiro Oda".
+
+:vol83 a wcms:Tome;
+    dc:title "Emperor of the Sea, Charlotte Linlin"@en;
+    wcms:number "83"^^xsd:integer;
+    wcms:startsAt :chap829;
+    wcms:endsAt :chap838.
+
+:chap829 a wcms:Chapter;
+    wcms:number "829"^^xsd:integer.
+
+:chap838 a wcms:Chapter;
+    wcms:number "838"^^xsd:integer.
+
+:vol84 a wcms:Tome;
+    dc:title "Luffy vs. Sanji"@en;
+    wcms:number "84"^^xsd:integer;
+    wcms:startsAt :chap839;
+    wcms:endsAt :chap848.
+
+:chap839 a wcms:Chapter;
+    wcms:number "839"^^xsd:integer.
+
+:chap848 a wcms:Chapter;
+    wcms:number "848"^^xsd:integer.
+
+:vol85 a wcms:Tome;
+    dc:title "Liar"@en;
+    wcms:number "85"^^xsd:integer;
+    wcms:startsAt :chap849;
+    wcms:endsAt :chap858.
+
+:chap849 a wcms:Chapter;
+    wcms:number "849"^^xsd:integer.
+
+:chap858 a wcms:Chapter;
+    wcms:number "858"^^xsd:integer.
+
+:vol86 a wcms:Tome;
+    dc:title "Emperor Assassination Plan"@en;
+    wcms:number "86"^^xsd:integer;
+    wcms:startsAt :chap859;
+    wcms:endsAt :chap869.
+
+:chap859 a wcms:Chapter;
+    wcms:number "859"^^xsd:integer.
+
+:chap869 a wcms:Chapter;
+    wcms:number "869"^^xsd:integer.
+
+:vol87 a wcms:Tome;
+    dc:title "Bittersweet"@en;
+    wcms:number "87"^^xsd:integer;
+    wcms:startsAt :chap870;
+    wcms:endsAt :chap879.
+
+:chap870 a wcms:Chapter;
+    wcms:number "870"^^xsd:integer.
+
+:chap879 a wcms:Chapter;
+    wcms:number "879"^^xsd:integer.
+
+:vol88 a wcms:Tome;
+    dc:title "Lion"@en;
+    wcms:number "88"^^xsd:integer;
+    wcms:startsAt :chap880;
+    wcms:endsAt :chap889.
+
+:chap880 a wcms:Chapter;
+    wcms:number "880"^^xsd:integer.
+
+:chap889 a wcms:Chapter;
+    wcms:number "889"^^xsd:integer.
+
+:vol89 a wcms:Tome;
+    dc:title "Bad End Musical"@en;
+    wcms:number "89"^^xsd:integer;
+    wcms:startsAt :chap890;
+    wcms:endsAt :chap900.
+
+:chap890 a wcms:Chapter;
+    wcms:number "890"^^xsd:integer.
+
+:chap900 a wcms:Chapter;
+    wcms:number "900"^^xsd:integer.
+
+:vol90 a wcms:Tome;
+    dc:title "Sacred Marijoa"@en;
+    wcms:number "90"^^xsd:integer;
+    wcms:startsAt :chap901;
+    wcms:endsAt :chap910.
+
+:chap901 a wcms:Chapter;
+    wcms:number "901"^^xsd:integer.
+
+:chap910 a wcms:Chapter;
+    wcms:number "910"^^xsd:integer.
+
+:vol91 a wcms:Tome;
+    dc:title "Adventure in the Land of Samurai"@en;
+    wcms:number "91"^^xsd:integer;
+    wcms:startsAt :chap911;
+    wcms:endsAt :chap921.
+
+:chap911 a wcms:Chapter;
+    wcms:number "911"^^xsd:integer.
+
+:chap921 a wcms:Chapter;
+    wcms:number "921"^^xsd:integer.
+
+:vol92 a wcms:Tome;
+    dc:title "Introducing Komurasaki the Oiran"@en;
+    wcms:number "92"^^xsd:integer;
+    wcms:startsAt :chap922;
+    wcms:endsAt :chap931.
+
+:chap922 a wcms:Chapter;
+    wcms:number "922"^^xsd:integer.
+
+:chap931 a wcms:Chapter;
+    wcms:number "931"^^xsd:integer.
+
+:vol93 a wcms:Tome;
+    dc:title "The Star of Ebisu"@en;
+    wcms:number "93"^^xsd:integer;
+    wcms:startsAt :chap932;
+    wcms:endsAt :chap942.
+
+:chap932 a wcms:Chapter;
+    wcms:number "932"^^xsd:integer.
+
+:chap942 a wcms:Chapter;
+    wcms:number "942"^^xsd:integer.
+
+:vol94 a wcms:Tome;
+    dc:title "A Soldier's Dream"@en;
+    wcms:number "94"^^xsd:integer;
+    wcms:startsAt :chap943;
+    wcms:endsAt :chap953.
+
+:chap943 a wcms:Chapter;
+    wcms:number "943"^^xsd:integer.
+
+:chap953 a wcms:Chapter;
+    wcms:number "953"^^xsd:integer.
+
+:vol95 a wcms:Tome;
+    dc:title "Oden's Adventure"@en;
+    wcms:number "95"^^xsd:integer;
+    wcms:startsAt :chap954;
+    wcms:endsAt :chap964.
+
+:chap954 a wcms:Chapter;
+    wcms:number "954"^^xsd:integer.
+
+:chap964 a wcms:Chapter;
+    wcms:number "964"^^xsd:integer.
