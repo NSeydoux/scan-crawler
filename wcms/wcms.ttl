@@ -7,7 +7,7 @@
 @prefix ldp:      <http://www.w3.org/ns/ldp#> .
 @prefix schema:   <http://schema.org/> .
 @prefix vann:     <http://purl.org/vocab/vann/> .
-@prefix wcms:     <http://localhost:5000/wcms.ttl>
+@prefix wcms:     <http://localhost:5000/wcms.ttl#> .
 
 wcms:
 	a owl:Ontology ;
@@ -18,7 +18,7 @@ wcms:
 	dcterms:date "2020-03-15" ;
 	dcterms:license <https://opensource.org/licenses/MIT> ;
 	vann:preferredNamespacePrefix "wcms" ;
-	vann:preferredNamespaceUri "https://nseydoux.inrupt.net/public/voc/wcms.ttl" .
+	vann:preferredNamespaceUri "http://localhost:5000/wcms.ttl#" .
 
 wcms:Manga a rdfs:Class;
     rdfs:label "Manga"@en;

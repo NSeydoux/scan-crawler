@@ -2,12 +2,12 @@
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> .
-@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix dc:  <http://purl.org/dc/terms/> .
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
 @prefix ldp:      <http://www.w3.org/ns/ldp#> .
 @prefix schema:   <http://schema.org/> .
-@prefix wcms:     <http://localhost:5000/wcms.ttl>
-@prefix op:       <http://localhost:5000/one-piece.ttl>
+@prefix wcms:     <http://localhost:5000/wcms.ttl#> .
+@prefix :       <http://localhost:5000/one-piece.ttl#> .
 
 :OnePiece a wcms:Manga;
     dc:title "One Piece"@en;
