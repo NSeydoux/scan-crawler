@@ -24,7 +24,7 @@ const EXTENSIONS: string[] = ["jpg", "png"]
  * @param page 
  */
 async function fetchPage(volume: number, chapter: number, page: number, extensionsTried: number) {
-    // console.log(`Fetching ${format(IRI_TEMPLATE, chapter, page)}`)
+    // console.log(`Fetching ${format(IRI_TEMPLATE, chapter, page, EXTENSIONS[extensionsTried])}`)
     const controller = new AbortController();
     const timeout = setTimeout(
         () => { controller.abort(); },
@@ -51,7 +51,7 @@ async function fetchPage(volume: number, chapter: number, page: number, extensio
                 throw err
             }
         })
-        .then(body => writeFile(`${volume}/${chapter}_${page}.jpg`, body, 'binary'));
+        .then(body => writeFile(`${volume.toString().padStart(3, "0")}/${chapter.toString().padStart(4, "0")}_${page.toString().padStart(2, "0")}.${EXTENSIONS[extensionsTried]}`, body, 'binary'));
 
 }
 
@@ -84,7 +84,7 @@ async function fetchChapter(volume: number, chapter: number) {
  */
 async function zipVolume(volume: number) {
     const zip = new JSZip()
-    glob(`${volume}/*.jpg`, async (err, files) => {
+    glob(`${volume.toString().padStart(3, "0")}/*`, async (err, files) => {
         if (err) throw err
         // Create a zip with all the files
         await Promise.all(files.map(
@@ -94,17 +94,17 @@ async function zipVolume(volume: number) {
         ))
         // Delete the zipped files
         Promise.all(files.map(file => unlink(file)))
-        .then(() => rmdir(`${volume}`))
+        .then(() => rmdir(`${volume.toString().padStart(3, "0")}`))
         // Write the zip to the filesystem
         zip.generateNodeStream({type:'nodebuffer',streamFiles:true})
-        .pipe(createWriteStream(`${volume}.cbz`))
+        .pipe(createWriteStream(`${volume.toString().padStart(3, "0")}.cbz`))
     })
     
 }
 
 async function fetchVolume(volumeInfo: VolumeInfo) {
     // First, create the directory
-    await mkdir(`${volumeInfo.volumeNumber}`).catch(console.error);
+    await mkdir(`${volumeInfo.volumeNumber.toString().padStart(3, "0")}`).catch(console.error);
     // Then, fetch all the chapters of the volume
     return Promise.all(
         // range is inclusive for the first param, and exclusive for the second
