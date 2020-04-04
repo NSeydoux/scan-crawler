@@ -3,8 +3,17 @@ const {mkdir} = fsPromise
 import {readVolumeMapping, VolumeInfo} from "./config"
 import {formatNumber, zipVolume} from "./save"
 import {fetchVolume} from "./fetch"
+import yargs = require('yargs');
 
 const DEBUG: boolean = false;
+
+interface Arguments {
+    id: string;
+    configIri: string;
+    firstTome: number;
+    lastTome: number | undefined;
+    oneTome: number | undefined;
+  }
 
 async function processVolume(id: string, volume: VolumeInfo): Promise<void> {
     // First, create the directory
@@ -15,12 +24,34 @@ async function processVolume(id: string, volume: VolumeInfo): Promise<void> {
     .catch(console.error);
 }
 
-readVolumeMapping("http://localhost:5000/one-piece.ttl")
+const argv: Arguments = yargs.options({
+    id: { type: 'string', describe: 'The manga id', demandOption: true },
+    configIri: {type: 'string', describe: 'Where to find the configuration.', demandOption: true},
+    firstTome: { type: 'number'},
+    lastTome: { type: 'number', default: 9999 },
+    oneTome: { type: 'number' },
+  }).argv;
+
+if(!argv.firstTome && !argv.oneTome) {
+    console.error("Either --firstTome or --oneTome must be set")
+    yargs.showHelp("error")
+} else {
+    readVolumeMapping(argv.configIri)
     .then(async mappings => {
+        if(argv.oneTome) {
+            argv.firstTome = argv.oneTome;
+            argv.lastTome = argv.oneTome;
+        }
         for(const mapping of mappings) {
-            await processVolume("one-piece", mapping)
+            if(mapping.volumeNumber >= argv.firstTome 
+                && mapping.volumeNumber <= argv.lastTome) {
+                    await processVolume(argv.id, mapping)
+            }
         }
     })
+}
+
+
 
 // // @ts-ignore
 // const root : HTMLElement = htmlParser.parse(body);
