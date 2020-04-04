@@ -11,7 +11,8 @@
 
 :OnePiece a wcms:Manga;
     dc:title "One Piece"@en;
-    dc:creator "Eichiro Oda".
+    dc:creator "Eichiro Oda";
+    wcms:identifier "one-piece".
 
 :vol83 a wcms:Tome;
     dc:title "Emperor of the Sea, Charlotte Linlin"@en;

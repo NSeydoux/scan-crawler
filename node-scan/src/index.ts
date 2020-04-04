@@ -6,10 +6,10 @@ import {fetchVolume} from "./fetch"
 
 const DEBUG: boolean = false;
 
-async function processVolume(volume: VolumeInfo): Promise<void> {
+async function processVolume(id: string, volume: VolumeInfo): Promise<void> {
     // First, create the directory
     return mkdir(`${formatNumber(volume.volumeNumber)}`)
-    .then(() => fetchVolume(volume))
+    .then(() => fetchVolume(id, volume))
     //After all the chapters have been fetched, zip the volume
     .then(() => zipVolume(volume.volumeNumber))
     .catch(console.error);
@@ -18,7 +18,7 @@ async function processVolume(volume: VolumeInfo): Promise<void> {
 readVolumeMapping("http://localhost:5000/one-piece.ttl")
     .then(async mappings => {
         for(const mapping of mappings) {
-            await processVolume(mapping)
+            await processVolume("one-piece", mapping)
         }
     })
 

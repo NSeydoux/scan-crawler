@@ -36,6 +36,10 @@ wcms:Webcomic a rdfs:Class;
     rdfs:label "Webcomic"@en;
     rdfs:comment "A webcomic is a comic periodically published on the web. It often has commonalities with the press syndicated comics."@en.
 
+wcms:identifier a rdf:Property;
+    rdfs:label "identifier"@en;
+    rdfs:comment "Identifier of a manga/comic."@en.
+
 wcms:lastRead a rdf:Property;
     rdfs:label "last read"@en;
     rdfs:comment "The last issue or chapter read by a person."@en.

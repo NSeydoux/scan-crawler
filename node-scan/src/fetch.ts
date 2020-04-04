@@ -8,7 +8,7 @@ import {savePage} from "./save"
 
 import {DEBUG} from "./index"
 
-const IRI_TEMPLATE = 'https://img.mghubcdn.com/file/imghub/one-piece/%d/%d.%s';
+const IRI_TEMPLATE = 'https://img.mghubcdn.com/file/imghub/%s/%d/%d.%s';
 const MAX_PARALLEL_FETCHES : number = 1;
 const PAGES_TO_FETCH : number[] = range(1, MAX_PARALLEL_FETCHES+1);
 const EXTENSIONS: string[] = ["jpg", "png"]
@@ -27,7 +27,7 @@ interface fetchedPage {
  * @param page 
  */
 async function fetchPage(
-    volume: number, chapter: number, 
+    id: string, volume: number, chapter: number, 
     page: number, extensionsTried: number
     ) : Promise<fetchedPage> {
     const controller = new AbortController();
@@ -36,7 +36,7 @@ async function fetchPage(
         5000,
     );
     return fetch(
-            format(IRI_TEMPLATE, chapter, page, EXTENSIONS[extensionsTried]),
+            format(IRI_TEMPLATE, id, chapter, page, EXTENSIONS[extensionsTried]),
             { signal: controller.signal }
         ).then(res => {
             if (!res.ok){
@@ -50,9 +50,9 @@ async function fetchPage(
                 // Retry on timeout
                 console.log("Retrying on timeout")
                 clearTimeout(timeout);
-                return fetchPage(volume, chapter, page, extensionsTried);
+                return fetchPage(id, volume, chapter, page, extensionsTried);
             } else if(extensionsTried + 1 < EXTENSIONS.length) {
-                return fetchPage(volume, chapter, page, extensionsTried + 1);
+                return fetchPage(id, volume, chapter, page, extensionsTried + 1);
             } else {
                 throw err
             }
@@ -64,14 +64,14 @@ async function fetchPage(
  * fetch fails.
  * @param chapter 
  */
-async function fetchChapter(volume: number, chapter: number) {
+async function fetchChapter(id: string, volume: number, chapter: number) {
     console.log(`Fetching chapter ${chapter}`)
     let chapterComplete : boolean = false;
     let pages_to_fetch = PAGES_TO_FETCH.map(x=>x);
     while(!chapterComplete){
         await Promise.all(
             pages_to_fetch.map(page => 
-                fetchPage(volume, chapter, page, 0)
+                fetchPage(id, volume, chapter, page, 0)
                 .then(fetchedPage => 
                     savePage(fetchedPage.data, 
                         volume, chapter, page,
@@ -85,12 +85,12 @@ async function fetchChapter(volume: number, chapter: number) {
     }
 }
 
-async function fetchVolume(volumeInfo: VolumeInfo) {
+async function fetchVolume(id: string, volumeInfo: VolumeInfo) {
     // Then, fetch all the chapters of the volume
     return Promise.all(
         // range is inclusive for the first param, and exclusive for the second
         range(volumeInfo.firstChapter, volumeInfo.lastChapter+1)
-        .map(chapter => fetchChapter(volumeInfo.volumeNumber, chapter))
+        .map(chapter => fetchChapter(id, volumeInfo.volumeNumber, chapter))
     )
 }
 
