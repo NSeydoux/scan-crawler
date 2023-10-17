@@ -1,10 +1,8 @@
-import fetch from "node-fetch"
-import {format} from "util"
-import {range} from "lodash"
+import { format } from "util"
+import { range } from "lodash"
 
-import AbortController from 'abort-controller';
-import {VolumeInfo} from "./config"
-import {savePage} from "./save"
+import { VolumeInfo } from "./config"
+import { savePage } from "./save"
 
 import {DEBUG} from "./index"
 
@@ -42,8 +40,10 @@ async function fetchPage(
             if (!res.ok){
                 throw Error(`Status ${res.status} on ${chapter}:${page}`)
             }
-            return res.buffer()
-        }).then(buff => { 
+            return res.blob()
+        }).then((blob) => blob.arrayBuffer())
+        .then((arrayBuf) => Buffer.from(arrayBuf))
+        .then(buff => { 
             return {data: buff, extension: EXTENSIONS[extensionsTried]}
         }).catch(err => {
             if(err.name === 'AbortError'){

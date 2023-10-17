@@ -1,6 +1,6 @@
-import {basename} from "path"
-import {promises as fsPromise, createWriteStream} from "fs"
-const {readFile, writeFile, mkdir, unlink, rmdir} = fsPromise
+import { basename } from "path"
+import { promises as fsPromise, createWriteStream } from "fs"
+const { readFile, writeFile, mkdir, unlink, rmdir } = fsPromise
 import glob = require("glob")
 import JSZip = require("jszip")
 

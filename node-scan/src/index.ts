@@ -1,8 +1,8 @@
-import {promises as fsPromise} from "fs"
-const {mkdir} = fsPromise
-import {readVolumeMapping, VolumeInfo} from "./config"
-import {formatNumber, zipVolume} from "./save"
-import {fetchVolume} from "./fetch"
+import { promises as fsPromise } from "fs"
+const { mkdir } = fsPromise
+import { readVolumeMapping, VolumeInfo } from "./config"
+import { formatNumber, zipVolume } from "./save"
+import { fetchVolume } from "./fetch"
 import yargs = require('yargs');
 
 const DEBUG: boolean = false;
