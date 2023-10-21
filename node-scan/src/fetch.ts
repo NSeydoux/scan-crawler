@@ -1,14 +1,19 @@
 import { format } from "util"
-import { range } from "lodash"
 
 import { VolumeInfo } from "./config"
 import { savePage } from "./save"
 
 import {DEBUG} from "./index"
 
+/**
+ * Range from start (inclusive) to end (exclusive).
+ */
+const range = (start: number, end: number) => [...Array(end-start).keys()].map((index) => index + start);
+
+
 const IRI_TEMPLATE = 'https://img.mghubcdn.com/file/imghub/%s/%d/%d.%s';
 const MAX_PARALLEL_FETCHES : number = 1;
-const PAGES_TO_FETCH : number[] = range(1, MAX_PARALLEL_FETCHES+1);
+const PAGES_TO_FETCH : number[] = range(1, MAX_PARALLEL_FETCHES);
 const EXTENSIONS: string[] = ["jpg", "png"]
 
 interface fetchedPage {
