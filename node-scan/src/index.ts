@@ -40,9 +40,9 @@ if(!argv.firstTome && !argv.oneTome) {
     .then(async mappings => {
         if(argv.oneTome) {
             argv.firstTome = argv.oneTome;
-            argv.lastTome = argv.oneTome;
+            argv.lastTome = argv.oneTome + 1;
         }
-        for(const mapping of mappings) {
+        for (const mapping of mappings) {
             if(mapping.volumeNumber >= argv.firstTome 
                 && mapping.volumeNumber <= argv.lastTome) {
                     await processVolume(argv.id, mapping)

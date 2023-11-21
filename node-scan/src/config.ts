@@ -1,6 +1,7 @@
 import { Parser, Store, DataFactory } from "n3";
 const { namedNode } = DataFactory;
 import { WCMS } from "./wcms"
+import { debug } from "console";
 
 interface VolumeInfo {
     volumeNumber: number,
@@ -34,10 +35,11 @@ async function parseRdf(str: string) {
  * @param iri 
  */
 async function readVolumeMapping(iri: string) : Promise<VolumeInfo[]> {
+    debug(`Fetching config from ${iri}`);
     const config = await fetch(iri)
       .then((response) => { return response.text() })
       .then(parseRdf);
-    
+    debug(JSON.stringify(config));
     const volumes = config.match(undefined, namedNode("http://www.w3.org/1999/02/22-rdf-syntax-ns#"), namedNode(WCMS.Tome));
     return Array.from(volumes)
       .map((q) => q.subject)
@@ -61,6 +63,7 @@ async function readVolumeMapping(iri: string) : Promise<VolumeInfo[]> {
             namedNode(lastChapterSubj), namedNode(WCMS.number), undefined)
           )[0].object.value
         );
+        console.log(`Mapping: ${JSON.stringify({ volumeNumber, firstChapter, lastChapter })}`)
         return { volumeNumber, firstChapter, lastChapter };
       })
     // const volumes = configDoc.getAllSubjectsOfType(WCMS.Tome)

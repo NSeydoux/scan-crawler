@@ -30,6 +30,6 @@
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
     // "allowUmdGlobalAccess": true,          /* Allow accessing UMD globals from modules. */
   },
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "exclude": ["node_modules/", "**/*.spec.ts"],
   "include": ["src/"]
 }
